@@ -14,6 +14,12 @@ storage.has('shortcut-emojis', function(error, hasKey) {
 	}
 });
 
+storage.get('shortcut-emojis', function(error, data) {
+	if (error) throw error;
+
+	console.log(data);
+});
+
 var windowOpened = 0
 var windowFavOpened = 0
 var favOpenedKey = null;
@@ -53,7 +59,15 @@ ipcMain.on('return-emojiresult', (event, arg) => {
 
 			if (data.indexOf(emojiname) == -1 && emoji.scan(arg).length == 1)
 			{
-				storage.set('shortcut-emojis', [data[9], emoji.char_to_unified(arg).toLowerCase(), data[1], data[2], data[3], data[4], data[5], data[6], data[7], data[8]], function(error) {
+				var emojicode = emoji.char_to_unified(arg).toLowerCase()
+				
+				if (!fs.existsSync('emojis/'+emojicode+'.svg'))
+				{
+					emojicode = emojicode.split("-")[0]
+				}
+
+				storage.set('shortcut-emojis', [data[9], emojicode, data[1], data[2], data[3], data[4], data[5], data[6], data[7], data[8]], function(error)
+				{
 					if (error) throw error;
 				})
 			}
