@@ -1,5 +1,5 @@
 {
-  "name": “keymoji”,
+  "name": "keymoji",
   "version": "1.0.0",
   "description": "A cross platform emoji keyboard that runs on Electron",
   "main": "index.js",
@@ -7,7 +7,7 @@
     "start": "electron index.js"
   },
   "author": "Bart Simons",
-  "license": “GNU GPL v3“,
+  "license": "GNU GPL v3",
   "dependencies": {
     "electron": "latest",
     "emoji-data": "latest",
